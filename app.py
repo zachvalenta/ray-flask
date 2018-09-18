@@ -34,5 +34,4 @@ def get_book(isbn):
 	for book in books:
 		if book['isbn'] == isbn:
 			return jsonify({'book': book})
-		else:
-			return 'could not find book'
+	return 'could not find book'
