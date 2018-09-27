@@ -1,5 +1,4 @@
-from flask import Flask
-from flask import jsonify
+from flask import Flask, jsonify, request
 
 # jsonify also handles headers
 
@@ -35,3 +34,8 @@ def get_book(isbn):
 		if book['isbn'] == isbn:
 			return jsonify({'book': book})
 	return 'could not find book'
+
+
+@app.route('/books', methods=['POST'])
+def add_book():
+	return jsonify(request.get_json())
