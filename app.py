@@ -1,6 +1,9 @@
 from flask import Flask, jsonify, request
 from werkzeug.exceptions import abort
 
+# TODO: add tests
+# TODO: differentiate dummy data across .json
+
 """
 NOTES
 
@@ -13,6 +16,9 @@ NOTES
 """
 
 app = Flask(__name__)
+
+# IN-MEM DATA STORE
+
 
 books = [
 	{
@@ -27,10 +33,25 @@ books = [
 	}
 ]
 
+# UTIL
 
-@app.route('/')
-def hello_world():
-	return 'hey zv'
+
+def handle_invalid_post_key_missing(book):
+	if 'name' in book and 'price' in book and 'isbn' in book:  # idky but Flask complains if not on one-line
+		return True
+	else:
+		return False
+
+
+def handle_invalid_post_key_wrong(book):
+	"""point here is to exclude any extraneous keys"""
+	return {
+		'name': book['name'],
+		'price': book['price'],
+		'isbn': book['isbn'],
+	}
+
+# ROUTES
 
 
 @app.route('/books')
@@ -46,21 +67,13 @@ def get_book(isbn):
 	return 'could not find book'
 
 
-def validate_book(book):
-	if 'name' in book and 'price' in book and 'isbn' in book:  # idky but Flask complains if not on one-line
-		return True
-	else:
-		return False
-
-
 @app.route('/books', methods=['POST'])
 def add_book():
 	new_book = request.get_json()
-	if validate_book(new_book):
-		books.insert(0, new_book)
+	if handle_invalid_post_key_missing(new_book):
+		validated_book = handle_invalid_post_key_wrong(new_book)
+		books.insert(0, validated_book)
 		return jsonify({'books': books})
 	else:
+		# TODO: mv to else of handle_invalid_post_key_missing
 		return abort(400)  # https://stackoverflow.com/a/32342570/6813490
-
-# TODO: add tests
-
