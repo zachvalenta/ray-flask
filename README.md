@@ -8,13 +8,29 @@ This repo is a record of working through the course ['Building a REST API Using 
 
 __GET__
 
+✅ all books
+```
+qiu -po 5000 -pa books
+```
+
+✅ single book
 ```
 qiu -po 5000 -pa books/0374533229
 ```
 
 __POST__
 
+✅ valid
 ```
-qiu -po 5000 -m POST -j post.json -pa books
+qiu -po 5000 -pa books -m POST -j post.json
 ```
 
+❌ invalid - missing key
+```
+qiu -po 5000 -pa books -m POST -j post-invalid-key-missing.json
+```
+
+❌ invalid - wrong key
+```
+qiu -po 5000 -pa books -m POST -j post-invalid-key-wrong.json
+```
