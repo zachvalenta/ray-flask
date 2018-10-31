@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from werkzeug.exceptions import abort
 
 """
 NOTES
@@ -54,7 +55,12 @@ def validate_book(book):
 
 @app.route('/books', methods=['POST'])
 def add_book():
-	return jsonify(request.get_json())
+	new_book = request.get_json()
+	if validate_book(new_book):
+		books.insert(0, new_book)
+		return jsonify({'books': books})
+	else:
+		return abort(400)  # https://stackoverflow.com/a/32342570/6813490
 
 # TODO: add tests
 
