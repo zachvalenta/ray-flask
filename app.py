@@ -1,8 +1,9 @@
 from flask import Flask, jsonify, request
 from werkzeug.exceptions import abort
 
-# TODO: add tests
+# TODO: .json to own folder
 # TODO: differentiate dummy data across .json
+# TODO: integration tests using .json
 
 """
 NOTES
@@ -21,59 +22,59 @@ app = Flask(__name__)
 
 
 books = [
-	{
-		'name': 'Origins of Political Order',
-		'price': 10.00,
-		'isbn': '0374533229',
-	},
-	{
-		'name': 'Political Order and Political Decay',
-		'price': 10.00,
-		'isbn': '0374535620',
-	}
+    {
+        'name': 'Origins of Political Order',
+        'price': 10.00,
+        'isbn': '0374533229',
+    },
+    {
+        'name': 'Political Order and Political Decay',
+        'price': 10.00,
+        'isbn': '0374535620',
+    }
 ]
 
 # UTIL
 
 
 def handle_invalid_post_key_missing(book):
-	if 'name' in book and 'price' in book and 'isbn' in book:  # idky but Flask complains if not on one-line
-		return True
-	else:
-		return False
+    if 'name' in book and 'price' in book and 'isbn' in book:  # idky but Flask complains if not on one-line
+        return True
+    else:
+        return False
 
 
 def handle_invalid_post_key_wrong(book):
-	"""point here is to exclude any extraneous keys"""
-	return {
-		'name': book['name'],
-		'price': book['price'],
-		'isbn': book['isbn'],
-	}
+    """point here is to exclude any extraneous keys"""
+    return {
+        'name': book['name'],
+        'price': book['price'],
+        'isbn': book['isbn'],
+    }
 
 # ROUTES
 
 
 @app.route('/books')
 def get_books():
-	return jsonify({'books': books})
+    return jsonify({'books': books})
 
 
 @app.route('/books/<string:isbn>')
 def get_book(isbn):
-	for book in books:
-		if book['isbn'] == isbn:
-			return jsonify({'book': book})
-	return 'could not find book'
+    for book in books:
+        if book['isbn'] == isbn:
+            return jsonify({'book': book})
+    return 'could not find book'
 
 
 @app.route('/books', methods=['POST'])
 def add_book():
-	new_book = request.get_json()
-	if handle_invalid_post_key_missing(new_book):
-		validated_book = handle_invalid_post_key_wrong(new_book)
-		books.insert(0, validated_book)
-		return jsonify({'books': books})
-	else:
-		# TODO: mv to else of handle_invalid_post_key_missing
-		return abort(400)  # https://stackoverflow.com/a/32342570/6813490
+    new_book = request.get_json()
+    if handle_invalid_post_key_missing(new_book):
+        validated_book = handle_invalid_post_key_wrong(new_book)
+        books.insert(0, validated_book)
+        return jsonify({'books': books})
+    else:
+        # TODO: mv to else of handle_invalid_post_key_missing
+        return abort(400)  # https://stackoverflow.com/a/32342570/6813490

@@ -25,12 +25,15 @@ __POST__
 qiu -po 5000 -pa books -m POST -j post.json
 ```
 
-❌ invalid - missing key
-```
-qiu -po 5000 -pa books -m POST -j post-invalid-key-missing.json
-```
-
 ❌ invalid - wrong key
 ```
 qiu -po 5000 -pa books -m POST -j post-invalid-key-wrong.json
+```
+
+📝 still 200, just throws away extraneous keys on obj creation
+
+
+❌ invalid - missing key
+```
+qiu -po 5000 -pa books -m POST -j post-invalid-key-missing.json
 ```
