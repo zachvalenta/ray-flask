@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response
 from werkzeug.exceptions import abort
 
 # TODO: .json to own folder
@@ -74,7 +74,7 @@ def add_book():
     if handle_invalid_post_key_missing(new_book):
         validated_book = handle_invalid_post_key_wrong(new_book)
         books.insert(0, validated_book)
-        return jsonify({'books': books})
+        return jsonify(books[0]), 201
     else:
         # TODO: mv to else of handle_invalid_post_key_missing
         return abort(400)  # https://stackoverflow.com/a/32342570/6813490
