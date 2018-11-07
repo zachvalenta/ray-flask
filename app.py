@@ -65,7 +65,7 @@ def get_book(isbn):
     for book in books:
         if book['isbn'] == isbn:
             return jsonify({'book': book})
-    return 'could not find book'
+        return abort(404)
 
 
 @app.route('/books', methods=['POST'])
@@ -77,4 +77,4 @@ def add_book():
         return jsonify(books[0]), 201
     else:
         # TODO: mv to else of handle_invalid_post_key_missing
-        return abort(400)  # https://stackoverflow.com/a/32342570/6813490
+        return abort(400)

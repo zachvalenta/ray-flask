@@ -18,6 +18,11 @@ qiu -po 5000 -pa books
 qiu -po 5000 -pa books/0374533229
 ```
 
+✅ single book, invalid
+```
+qiu -po 5000 -pa books/0000
+```
+
 __POST__
 
 ✅ valid
