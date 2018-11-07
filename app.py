@@ -74,7 +74,12 @@ def add_book():
     if handle_invalid_post_key_missing(new_book):
         validated_book = handle_invalid_post_key_wrong(new_book)
         books.insert(0, validated_book)
-        return jsonify(books[0]), 201
+        res = Response('', 201, mimetype='application/json')
+        # TODO: why does this mangle the ISBN
+        # res.headers['Location'] = '{} {}'.format('/books/', validated_book['isbn'])
+        res.headers['Location'] = '/books/' + str(validated_book['isbn'])
+        return res
+
     else:
         # TODO: mv to else of handle_invalid_post_key_missing
         return abort(400)
