@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, jsonify, request, Response
 from werkzeug.exceptions import abort
 
@@ -65,7 +67,12 @@ def get_book(isbn):
     for book in books:
         if book['isbn'] == isbn:
             return jsonify({'book': book})
-        return abort(404)
+        else:
+            err_msg = {'error': 'invalid book object'}
+            # TODO: rf to use this in 200
+            # TODO: mimetype necessary each time? if so, store in const
+            res = Response(json.dumps(err_msg), 404, mimetype='application/json')
+            return res
 
 
 @app.route('/books', methods=['POST'])
@@ -74,9 +81,10 @@ def add_book():
     if handle_invalid_post_key_missing(new_book):
         validated_book = handle_invalid_post_key_wrong(new_book)
         books.insert(0, validated_book)
-        res = Response('', 201, mimetype='application/json')
+        res = Response('', 201, mimetype='application/json')  # TODO: tlrd for mimetype
         # TODO: why does this mangle the ISBN
         # res.headers['Location'] = '{} {}'.format('/books/', validated_book['isbn'])
+        # TODO: research HTTP 'Location' header
         res.headers['Location'] = '/books/' + str(validated_book['isbn'])
         return res
 
