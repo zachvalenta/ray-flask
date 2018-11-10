@@ -67,6 +67,7 @@ def get_book(isbn):
     for book in books:
         if book['isbn'] == isbn:
             return jsonify({'book': book})
+        # TODO: remove else block and put return outside loop
         else:
             err_msg = {'error': 'invalid book object'}
             # TODO: rf to use this in 200
@@ -91,3 +92,11 @@ def add_book():
     else:
         # TODO: mv to else of handle_invalid_post_key_missing
         return abort(400)
+
+
+@app.route('/books/<string:isbn>', methods=['PUT'])
+def update_book(isbn):
+    for book in books:
+        if book['isbn'] == isbn:
+            return jsonify({'book': book})
+    return abort(404)
