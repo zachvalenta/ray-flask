@@ -63,6 +63,11 @@ def get_books():
     return jsonify({'books': books})
 
 
+@app.route('/books/count')
+def get_books_count():
+    return jsonify({'book_count': len(books)})
+
+
 @app.route('/books/<string:isbn>')
 def get_book(isbn):
     for book in books:
