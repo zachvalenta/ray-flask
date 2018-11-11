@@ -6,12 +6,17 @@ from werkzeug.exceptions import abort
 # TODO: .json to own folder
 # TODO: differentiate dummy data across .json
 # TODO: integration tests using .json
+# TODO: add PATCH
+# TODO: add DELETE
+# TODO: add validations on PUT
+# TODO: extract lookup using isbn
 
 """
 NOTES
 
 * definition of a framework: receive req, route to controller, dispatch from controller, return res
-* jsonify also handles headers
+* `jsonify()` dict ➡️ json, add HTTP headers
+* `request.json` returns dict
 * docs 1.3.2 say use `SimpleJSON`, why is course using `jsonify`?
 * when did they get rid of the `app.run(port=5000)` bit?
 * JWT -> https://github.com/vimalloc/flask-jwt-extended
@@ -57,7 +62,6 @@ def handle_invalid_post_key_wrong(book):
 # ROUTES
 
 
-# TODO endpoint for sum books
 @app.route('/books')
 def get_books():
     return jsonify({'books': books})
@@ -83,7 +87,7 @@ def get_book(isbn):
 
 
 @app.route('/books', methods=['POST'])
-def add_book():
+def post_book():
     new_book = request.get_json()
     if handle_invalid_post_key_missing(new_book):
         validated_book = handle_invalid_post_key_wrong(new_book)
@@ -101,11 +105,12 @@ def add_book():
 
 
 @app.route('/books/<string:isbn>', methods=['PUT'])
-def update_book(isbn):
+def put_book(isbn):
+    # TODO client sending isbn in URL so payload should only be name and price
     new_book = request.get_json()
     for book in books:
         if book['isbn'] == isbn:
-            # TODO validate
+            # TODO validate, add 204 status code
             books[books.index(book)] = new_book
-            return jsonify({'book': book})
+            return jsonify({'book': new_book})
     return abort(404)

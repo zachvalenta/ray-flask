@@ -2,11 +2,11 @@
 
 This repo is a record of working through the course ['Building a REST API Using Python and Flask'](https://app.pluralsight.com/library/courses/python-flask-rest-api/table-of-contents)
 
-## hit endpoints
+## endpoints
 
 📍 I'm using a wrapper around `httpie` I wrote called [qiu](https://github.com/zachvalenta/util-scripts)
 
-__GET__
+### GET
 
 ✅ all books
 ```
@@ -23,7 +23,7 @@ qiu -po 5000 -pa books/0374533229
 qiu -po 5000 -pa books/0000
 ```
 
-__POST__
+### POST
 
 ✅ valid
 ```
@@ -43,7 +43,7 @@ qiu -po 5000 -pa books -m POST -j post-invalid-key-wrong.json
 qiu -po 5000 -pa books -m POST -j post-invalid-key-missing.json
 ```
 
-__PUT__
+### PUT
 
 ✅ valid
 ```
