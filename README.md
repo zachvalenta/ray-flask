@@ -47,7 +47,7 @@ __PUT__
 
 ✅ valid
 ```
-qiu -po 5000 -pa books/0374533229 -m PUT
+qiu -po 5000 -pa books/0374533229 -m PUT -j put.json
 ```
 
 ❌ invalid - URL

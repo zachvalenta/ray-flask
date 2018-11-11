@@ -57,6 +57,7 @@ def handle_invalid_post_key_wrong(book):
 # ROUTES
 
 
+# TODO endpoint for sum books
 @app.route('/books')
 def get_books():
     return jsonify({'books': books})
@@ -87,7 +88,7 @@ def add_book():
         # res.headers['Location'] = '{} {}'.format('/books/', validated_book['isbn'])
         # TODO: research HTTP 'Location' header
         res.headers['Location'] = '/books/' + str(validated_book['isbn'])
-        return res
+        return res  # TODO return json of created
 
     else:
         # TODO: mv to else of handle_invalid_post_key_missing
@@ -96,7 +97,10 @@ def add_book():
 
 @app.route('/books/<string:isbn>', methods=['PUT'])
 def update_book(isbn):
+    new_book = request.get_json()
     for book in books:
         if book['isbn'] == isbn:
+            # TODO validate
+            books[books.index(book)] = new_book
             return jsonify({'book': book})
     return abort(404)
