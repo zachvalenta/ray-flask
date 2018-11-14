@@ -3,13 +3,12 @@ import json
 from flask import Flask, jsonify, request, Response
 from werkzeug.exceptions import abort
 
-# TODO: .json to own folder
-# TODO: differentiate dummy data across .json
 # TODO: integration tests using .json
+# TODO: prevent dupe POST
+# TODO: add validations on PUT
 # TODO: add PATCH
 # TODO: add DELETE
-# TODO: add validations on PUT
-# TODO: extract lookup using isbn
+# TODO: .json to own folder
 
 """
 NOTES
@@ -58,6 +57,12 @@ def handle_invalid_post_key_wrong(book):
         'price': book['price'],
         'isbn': book['isbn'],
     }
+
+
+def lookup_by_isbn(lookup):
+    for book in books:
+        if book['isbn'] == lookup:
+            return book
 
 # ROUTES
 
@@ -108,9 +113,10 @@ def post_book():
 def put_book(isbn):
     # TODO client sending isbn in URL so payload should only be name and price
     new_book = request.get_json()
-    for book in books:
-        if book['isbn'] == isbn:
-            # TODO validate, add 204 status code
-            books[books.index(book)] = new_book
-            return jsonify({'book': new_book})
-    return abort(404)
+    book_to_update = lookup_by_isbn(isbn)
+    # TODO validate, add 204 status code
+    if book_to_update:
+        books[books.index(book_to_update)] = new_book
+        return jsonify({'book': new_book})
+    else:
+        abort(404)
