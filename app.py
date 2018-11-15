@@ -3,6 +3,8 @@ import json
 from flask import Flask, jsonify, request, Response
 from werkzeug.exceptions import abort
 
+# TODO: `requests` to test README endpoints
+# TODO: endpoint to clear all data
 # TODO: integration tests using .json
 # TODO: prevent dupe POST
 # TODO: add validations on PUT
@@ -97,11 +99,9 @@ def post_book():
     if handle_invalid_post_key_missing(new_book):
         validated_book = handle_invalid_post_key_wrong(new_book)
         books.insert(0, validated_book)
-        res = Response('', 201, mimetype='application/json')  # TODO: tlrd for mimetype
-        # TODO: why does this mangle the ISBN
-        # res.headers['Location'] = '{} {}'.format('/books/', validated_book['isbn'])
-        # TODO: research HTTP 'Location' header
-        res.headers['Location'] = '/books/' + str(validated_book['isbn'])
+        # TODO: research HTTP 'Location' header, mimetype
+        res = Response('', 201, mimetype='application/json')
+        res.headers['Location'] = '{}{}'.format('/books/', str(validated_book['isbn']))
         return res  # TODO return json of created
 
     else:
