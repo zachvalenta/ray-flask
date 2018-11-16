@@ -11,6 +11,7 @@ from werkzeug.exceptions import abort
 # TODO: add PATCH
 # TODO: add DELETE
 # TODO: .json to own folder
+# TODO: mimetype necessary each time? if so, store in const
 
 """
 NOTES
@@ -81,16 +82,13 @@ def get_books_count():
 
 @app.route('/books/<string:isbn>')
 def get_book(isbn):
-    for book in books:
-        if book['isbn'] == isbn:
-            return jsonify({'book': book})
-        # TODO: remove else block and put return outside loop
-        else:
-            err_msg = {'error': 'invalid book object'}
-            # TODO: rf to use this in 200
-            # TODO: mimetype necessary each time? if so, store in const
-            res = Response(json.dumps(err_msg), 404, mimetype='application/json')
-            return res
+    book_found = lookup_by_isbn(isbn)
+    if book_found:
+        return jsonify({'book': book_found})
+    else:
+        err_msg = {'error': 'invalid isbn'}
+        res = Response(json.dumps(err_msg), 404, mimetype='application/json')
+        return res
 
 
 @app.route('/books', methods=['POST'])
@@ -99,10 +97,10 @@ def post_book():
     if handle_invalid_post_key_missing(new_book):
         validated_book = handle_invalid_post_key_wrong(new_book)
         books.insert(0, validated_book)
-        # TODO: research HTTP 'Location' header, mimetype
+        # TODO: mimetype, research HTTP 'Location' header -> should you also be returning JSON of created?
         res = Response('', 201, mimetype='application/json')
         res.headers['Location'] = '{}{}'.format('/books/', str(validated_book['isbn']))
-        return res  # TODO return json of created
+        return res
 
     else:
         # TODO: mv to else of handle_invalid_post_key_missing
