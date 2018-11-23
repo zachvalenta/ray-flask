@@ -60,3 +60,11 @@ class TestAPI(unittest.TestCase):
         url_isbn_lookup = '{}/{}'.format(self.base_url, book_update['isbn'])
         res = requests.put(url_isbn_lookup, json=book_update)
         self.assertEqual(404, res.status_code)
+
+    def test_PUT_200_key_extraneous(self):
+        book = {"name": "alice", "price": 42.00, "isbn": "0374533123"}
+        requests.post(self.base_url, json=book)
+        book_update = {"name": "alice", "price": 44.00, "isbn": "0374533123", "foo": "bar"}
+        url_isbn_lookup = '{}/{}'.format(self.base_url, book_update['isbn'])
+        res = requests.put(url_isbn_lookup, json=book_update)
+        self.assertEqual(200, res.status_code)
