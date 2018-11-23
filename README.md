@@ -52,7 +52,7 @@ qiu -po 5000 -pa books -m POST -j post-invalid-key-missing.json
 
 ✅ valid
 ```
-qiu -po 5000 -pa books/0374533229 -m PUT -j put.json
+qiu -po 5000 -pa books/0812972864 -m PUT -j put.json
 ```
 
 ❌ invalid - URL

@@ -99,10 +99,10 @@ def put_book(isbn):
     # TODO client sending isbn in URL so payload should only be name and price
     new_book = request.get_json()
     book_to_update = lookup_by_isbn(isbn)
-    # TODO validate, add 204 status code
+    # TODO validate
     if book_to_update:
         books[books.index(book_to_update)] = new_book
-        return jsonify({'book': new_book})
+        return Response(json.dumps(new_book), 200, mimetype='application/json')
     else:
         abort(404)
 

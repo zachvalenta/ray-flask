@@ -29,6 +29,7 @@ class TestAPI(unittest.TestCase):
         res = requests.get(isbn_lookup_url)
         self.assertEqual(404, res.status_code)
 
+    # TODO: understand detail of what requests wants here
     def test_POST_201(self):
         book = {"name": "foo", "price": 42.00, "isbn": "0123456789"}
         res = requests.post(self.base_url, json=book)
@@ -43,3 +44,11 @@ class TestAPI(unittest.TestCase):
         book = {"name": "foo", "isbn": "0374533123"}
         res = requests.post(self.base_url, json=book)
         self.assertEqual(400, res.status_code)
+
+    def test_PUT_200(self):
+        book = {"name": "foo", "price": 42.00, "isbn": "0123456789"}
+        requests.post(self.base_url, json=book)
+        book_update = {"name": "foo", "price": 43.00, "isbn": "0123456789"}
+        url_isbn_lookup = '{}/{}'.format(self.base_url, book['isbn'])
+        res = requests.put(url_isbn_lookup, json=book_update)
+        self.assertEqual(200, res.status_code)
