@@ -98,7 +98,7 @@ def post_book():
         validated_book = handle_invalid_post_key_wrong(new_book)
         books.insert(0, validated_book)
         # TODO: mimetype, research HTTP 'Location' header -> should you also be returning JSON of created?
-        res = Response('', 201, mimetype='application/json')
+        res = Response(json.dumps(new_book), 201, mimetype='application/json')
         res.headers['Location'] = '{}{}'.format('/books/', str(validated_book['isbn']))
         return res
 

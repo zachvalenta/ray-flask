@@ -4,24 +4,31 @@ This repo is a record of working through the course ['Building a REST API Using 
 
 📍 I'm using a wrapper around `httpie` I wrote called [qiu](https://github.com/zachvalenta/util-scripts)
 
-## GET
+## EXAMPLE REQUESTS
 
-✅ all books
+### GET
+
+✅ all
 ```
 qiu -po 5000 -pa books
 ```
 
-✅ single book
+✅ count
+```
+qiu -po 5000 -pa books/count
+```
+
+✅ single
 ```
 qiu -po 5000 -pa books/0374533229
 ```
 
-❌ single book, invalid URL
+❌ single - invalid URL
 ```
 qiu -po 5000 -pa books/0000
 ```
 
-## POST
+### POST
 
 ✅ valid
 ```
@@ -41,7 +48,7 @@ qiu -po 5000 -pa books -m POST -j post-invalid-key-wrong.json
 qiu -po 5000 -pa books -m POST -j post-invalid-key-missing.json
 ```
 
-## PUT
+### PUT
 
 ✅ valid
 ```

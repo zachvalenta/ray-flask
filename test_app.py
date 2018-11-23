@@ -1,13 +1,6 @@
-import json
 import unittest
 
 import requests
-
-
-def load_file(file):
-    with open(file) as f:
-        # TODO: this `io.TextWrapper` to `dict` to `json` is inelegant
-        return json.load(f)
 
 
 class TestAPI(unittest.TestCase):
@@ -30,8 +23,7 @@ class TestAPI(unittest.TestCase):
         res = requests.get(isbn_lookup_url)
         self.assertEqual(404, res.status_code)
 
-    # TODO: why the 500?
-    # def test_post(self):
-    #     jay = json.dumps(load_file('post.json'))
-    #     res = requests.post(self.base_url, json=jay)
-    #     self.assertEqual(201, res.status_code)
+    def test_post(self):
+        book = {"name": "foo", "price": 42.00, "isbn": "0374533123"}
+        res = requests.post(self.base_url, json=book)
+        self.assertEqual(201, res.status_code)
