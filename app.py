@@ -3,15 +3,13 @@ import json
 from flask import Flask, jsonify, request, Response
 from werkzeug.exceptions import abort
 
-# TODO: `requests` to test README endpoints
-# TODO: endpoint to clear all data
-# TODO: integration tests using .json
 # TODO: prevent dupe POST
 # TODO: add validations on PUT
 # TODO: add PATCH
 # TODO: add DELETE
-# TODO: .json to own folder
+# TODO: sets
 # TODO: mimetype necessary each time? if so, store in const
+# TODO: 研究 Location header
 
 """
 NOTES
@@ -33,15 +31,14 @@ app = Flask(__name__)
 books = []
 
 
-def handle_invalid_post_key_missing(book):
-    if 'name' in book and 'price' in book and 'isbn' in book:  # idky but Flask complains if not on one-line
-        return True
-    else:
-        return False
+def check_keys_present(req):
+    required_keys = {'isbn', 'name', 'price'}
+    request_keys = set(req.keys())
+    overlap = required_keys.intersection(request_keys) == required_keys
+    return True if overlap else False
 
 
-def handle_invalid_post_key_wrong(book):
-    """point here is to exclude any extraneous keys"""
+def handle_extraneous_keys(book):
     return {
         'name': book['name'],
         'price': book['price'],
@@ -81,25 +78,22 @@ def get_book(isbn):
 @app.route('/books', methods=['POST'])
 def post_book():
     new_book = request.get_json()
-    if handle_invalid_post_key_missing(new_book):
-        validated_book = handle_invalid_post_key_wrong(new_book)
+    if check_keys_present(new_book):
+        validated_book = handle_extraneous_keys(new_book)
         books.insert(0, validated_book)
-        # TODO: mimetype, research HTTP 'Location' header -> should you also be returning JSON of created?
         res = Response(json.dumps(new_book), 201, mimetype='application/json')
         res.headers['Location'] = '{}{}'.format('/books/', str(validated_book['isbn']))
         return res
-
     else:
-        # TODO: mv to else of handle_invalid_post_key_missing
-        return abort(400)
+        return Response('keys missing', 400)
 
 
 @app.route('/books/<string:isbn>', methods=['PUT'])
 def put_book(isbn):
-    # TODO client sending isbn in URL so payload should only be name and price
+    # TODO: client sending isbn in URL so payload should only be name and price
     new_book = request.get_json()
     book_to_update = lookup_by_isbn(isbn)
-    # TODO validate
+    # TODO: validate
     if book_to_update:
         books[books.index(book_to_update)] = new_book
         return Response(json.dumps(new_book), 200, mimetype='application/json')

@@ -20,7 +20,7 @@ qiu -po 5000 -pa books/count
 
 ✅ single
 ```
-qiu -po 5000 -pa books/0374533229
+qiu -po 5000 -pa books/<isbn>
 ```
 
 ❌ single - invalid URL
@@ -30,37 +30,29 @@ qiu -po 5000 -pa books/0000
 
 ### POST
 
-✅ valid
+✅ success
 ```
 qiu -po 5000 -pa books -m POST -j post.json
 ```
 
-❌ invalid - JSON (wrong key)
+✅ success - key wrong
 ```
 qiu -po 5000 -pa books -m POST -j post-invalid-key-wrong.json
 ```
 
-📝 still 200, just throws away extraneous keys on obj creation
-
-
-❌ invalid - JSON (missing key)
+❌ fail - key missing
 ```
 qiu -po 5000 -pa books -m POST -j post-invalid-key-missing.json
 ```
 
 ### PUT
 
-✅ valid
+✅ success
 ```
 qiu -po 5000 -pa books/0812972864 -m PUT -j put.json
 ```
 
-❌ invalid - URL
-```
-
-```
-
-❌ invalid JSON (wrong key)
+❌ fail - JSON (wrong key)
 ```
 
 ```
