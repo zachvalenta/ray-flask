@@ -27,23 +27,10 @@ NOTES
 
 app = Flask(__name__)
 
-# IN-MEM DATA STORE
-
-
-books = [
-    {
-        'name': 'Origins of Political Order',
-        'price': 10.00,
-        'isbn': '0374533229',
-    },
-    {
-        'name': 'Political Order and Political Decay',
-        'price': 10.00,
-        'isbn': '0374535620',
-    }
-]
 
 # UTIL
+
+books = []
 
 
 def handle_invalid_post_key_missing(book):
@@ -118,3 +105,9 @@ def put_book(isbn):
         return jsonify({'book': new_book})
     else:
         abort(404)
+
+
+@app.route('/books/clear', methods=['DELETE'])
+def delete_books():
+    books.clear()
+    return Response('', 204)
