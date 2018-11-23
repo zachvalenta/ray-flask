@@ -53,7 +53,15 @@ class TestAPI(unittest.TestCase):
         res = requests.put(url_isbn_lookup, json=book_update)
         self.assertEqual(200, res.status_code)
 
-    def test_PUT_404(self):
+    def test_PUT_200_key_extraneous(self):
+        book = {"name": "alice", "price": 42.00, "isbn": "0374533123"}
+        requests.post(self.base_url, json=book)
+        book_update = {"name": "alice", "price": 43.00, "isbn": "0374533123", "foo": "bar"}
+        url_isbn_lookup = '{}/{}'.format(self.base_url, book_update['isbn'])
+        res = requests.put(url_isbn_lookup, json=book_update)
+        self.assertEqual(200, res.status_code)
+
+    def test_PUT_404_isbn_lookup(self):
         book = {"name": "foo", "price": 42.00, "isbn": "0123456789"}
         requests.post(self.base_url, json=book)
         book_update = {"name": "foo", "price": 43.00, "isbn": "000"}
@@ -61,10 +69,10 @@ class TestAPI(unittest.TestCase):
         res = requests.put(url_isbn_lookup, json=book_update)
         self.assertEqual(404, res.status_code)
 
-    def test_PUT_200_key_extraneous(self):
+    def test_PUT_400_key_missing(self):
         book = {"name": "alice", "price": 42.00, "isbn": "0374533123"}
         requests.post(self.base_url, json=book)
-        book_update = {"name": "alice", "price": 44.00, "isbn": "0374533123", "foo": "bar"}
+        book_update = {"price": 44.00, "isbn": "0374533123"}
         url_isbn_lookup = '{}/{}'.format(self.base_url, book_update['isbn'])
         res = requests.put(url_isbn_lookup, json=book_update)
-        self.assertEqual(200, res.status_code)
+        self.assertEqual(400, res.status_code)

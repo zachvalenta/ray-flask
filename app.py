@@ -1,8 +1,8 @@
 import json
 
 from flask import Flask, jsonify, request, Response
-from werkzeug.exceptions import abort
 
+# TODO: update README, remove JSON
 # TODO: prevent dupe POST
 # TODO: add validations on PUT
 # TODO: add PATCH
@@ -94,12 +94,14 @@ def put_book(isbn):
     # TODO: client sending isbn in URL so payload should only be name and price
     new_book = request.get_json()
     book_to_update = lookup_by_isbn(isbn)
-    if book_to_update and check_keys_present(new_book):
+    if not book_to_update:
+        return Response('invalid isbn', 404)
+    if not check_keys_present(new_book):
+        return Response('keys missing', 400)
+    else:
         validated_book = handle_extraneous_keys(new_book)
         books[books.index(book_to_update)] = validated_book
         return Response(json.dumps(validated_book), 200, mimetype='application/json')
-    else:
-        abort(404)
 
 
 @app.route('/books/clear', methods=['DELETE'])
