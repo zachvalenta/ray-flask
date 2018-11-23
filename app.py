@@ -8,6 +8,7 @@ from werkzeug.exceptions import abort
 # TODO: add PATCH
 # TODO: add DELETE
 # TODO: sets
+# TODO: add error handlers http://flask.pocoo.org/docs/1.0/patterns/apierrors/
 # TODO: mimetype necessary each time? if so, store in const
 # TODO: 研究 Location header
 
@@ -93,10 +94,10 @@ def put_book(isbn):
     # TODO: client sending isbn in URL so payload should only be name and price
     new_book = request.get_json()
     book_to_update = lookup_by_isbn(isbn)
-    # TODO: validate
-    if book_to_update:
-        books[books.index(book_to_update)] = new_book
-        return Response(json.dumps(new_book), 200, mimetype='application/json')
+    if book_to_update and check_keys_present(new_book):
+        validated_book = handle_extraneous_keys(new_book)
+        books[books.index(book_to_update)] = validated_book
+        return Response(json.dumps(validated_book), 200, mimetype='application/json')
     else:
         abort(404)
 
