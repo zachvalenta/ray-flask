@@ -45,6 +45,12 @@ class TestAPI(unittest.TestCase):
         res = requests.post(self.base_url, json=book)
         self.assertEqual(400, res.status_code)
 
+    def test_POST_400_dupe(self):
+        book = {"name": "foo", "price": 42.00, "isbn": "0123456789"}
+        requests.post(self.base_url, json=book)
+        res = requests.post(self.base_url, json=book)
+        self.assertEqual(400, res.status_code)
+
     def test_PUT_200(self):
         book = {"name": "foo", "price": 42.00, "isbn": "0123456789"}
         requests.post(self.base_url, json=book)
