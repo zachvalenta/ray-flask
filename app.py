@@ -79,6 +79,9 @@ def get_book(isbn):
 @app.route('/books', methods=['POST'])
 def post_book():
     new_book = request.get_json()
+    book_exists = lookup_by_isbn(new_book['isbn'])
+    if book_exists:
+        return Response('book already exists', 400)
     if check_keys_present(new_book):
         validated_book = handle_extraneous_keys(new_book)
         books.insert(0, validated_book)
