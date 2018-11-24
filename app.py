@@ -79,17 +79,15 @@ def get_book(isbn):
 @app.route('/books', methods=['POST'])
 def post_book():
     new_book = request.get_json()
-    book_exists = lookup_by_isbn(new_book['isbn'])
-    if book_exists:
+    if lookup_by_isbn(new_book['isbn']):
         return Response('book already exists', 400)
-    if check_keys_present(new_book):
-        validated_book = handle_extraneous_keys(new_book)
-        books.insert(0, validated_book)
-        res = Response(json.dumps(new_book), 201, mimetype='application/json')
-        res.headers['Location'] = '{}{}'.format('/books/', str(validated_book['isbn']))
-        return res
-    else:
+    if not check_keys_present(new_book):
         return Response('keys missing', 400)
+    validated_book = handle_extraneous_keys(new_book)
+    books.insert(0, validated_book)
+    res = Response(json.dumps(new_book), 201, mimetype='application/json')
+    res.headers['Location'] = '{}{}'.format('/books/', str(validated_book['isbn']))
+    return res
 
 
 @app.route('/books/<string:isbn>', methods=['PUT'])
