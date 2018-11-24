@@ -2,10 +2,10 @@ import json
 
 from flask import Flask, jsonify, request, Response
 
-# TODO: update README, remove JSON
 # TODO: add PATCH
 # TODO: add DELETE
 # TODO: add error handlers http://flask.pocoo.org/docs/1.0/patterns/apierrors/
+# TODO: JSON - send JSON from shell using httpie, rm JSON files, update README
 # TODO: 研究 Location header, sets, mimetype
 
 """
