@@ -3,14 +3,10 @@ import json
 from flask import Flask, jsonify, request, Response
 
 # TODO: update README, remove JSON
-# TODO: prevent dupe POST
-# TODO: add validations on PUT
 # TODO: add PATCH
 # TODO: add DELETE
-# TODO: sets
 # TODO: add error handlers http://flask.pocoo.org/docs/1.0/patterns/apierrors/
-# TODO: mimetype necessary each time? if so, store in const
-# TODO: 研究 Location header
+# TODO: 研究 Location header, sets, mimetype
 
 """
 NOTES
@@ -71,8 +67,7 @@ def get_book(isbn):
     if book_found:
         return jsonify({'book': book_found})
     else:
-        err_msg = {'error': 'invalid isbn'}
-        res = Response(json.dumps(err_msg), 404, mimetype='application/json')
+        res = Response('no book found', 404)
         return res
 
 
@@ -96,7 +91,7 @@ def put_book(isbn):
     new_book = request.get_json()
     book_to_update = lookup_by_isbn(isbn)
     if not book_to_update:
-        return Response('invalid isbn', 404)
+        return Response('no book to update', 404)
     if not check_keys_present(new_book):
         return Response('keys missing', 400)
     else:
