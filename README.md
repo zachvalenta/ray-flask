@@ -27,12 +27,12 @@ __POST__
 
 ✅ single
 ```
-qiu -po 5000 -pa books -m POST -j post.json
+qiu -po 5000 -pa books -m POST -j json/post.json
 ```
 
 __PUT__
 
 ✅ single
 ```
-qiu -po 5000 -pa books/0812972864 -m PUT -j put.json
+qiu -po 5000 -pa books/0812972864 -m PUT -j json/put.json
 ```

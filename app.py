@@ -5,7 +5,6 @@ from flask import Flask, jsonify, request, Response
 # TODO: add PATCH
 # TODO: add DELETE
 # TODO: add error handlers http://flask.pocoo.org/docs/1.0/patterns/apierrors/
-# TODO: JSON - send JSON from shell using httpie, rm JSON files, update README
 # TODO: 研究 Location header, sets, mimetype
 
 """
@@ -87,7 +86,6 @@ def post_book():
 
 @app.route('/books/<string:isbn>', methods=['PUT'])
 def put_book(isbn):
-    # TODO: client sending isbn in URL so payload should only be name and price
     new_book = request.get_json()
     book_to_update = lookup_by_isbn(isbn)
     if not book_to_update:
