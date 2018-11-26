@@ -36,3 +36,9 @@ __PUT__
 ```
 qiu -po 5000 -pa books/0812972864 -m PUT -j json/put.json
 ```
+
+__DELETE__
+
+```
+qiu -po 5000 -pa books/clear -m DELETE
+```

@@ -2,22 +2,10 @@ import json
 
 from flask import Flask, jsonify, request, Response
 
+# TODO: swap out `jsonify()`
 # TODO: add PATCH
 # TODO: add DELETE
-# TODO: add error handlers http://flask.pocoo.org/docs/1.0/patterns/apierrors/
 # TODO: 研究 Location header, sets, mimetype
-
-"""
-NOTES
-
-* definition of a framework: receive req, route to controller, dispatch from controller, return res
-* `jsonify()` dict ➡️ json, add HTTP headers
-* `request.json` returns dict
-* docs 1.3.2 say use `SimpleJSON`, why is course using `jsonify`?
-* when did they get rid of the `app.run(port=5000)` bit?
-* JWT -> https://github.com/vimalloc/flask-jwt-extended
-
-"""
 
 app = Flask(__name__)
 
