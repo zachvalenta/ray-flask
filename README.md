@@ -2,8 +2,6 @@
 
 This repo is a record of working through the course ['Building a REST API Using Python and Flask'](https://app.pluralsight.com/library/courses/python-flask-rest-api/table-of-contents)
 
-📍 I'm using a wrapper around `httpie` I wrote called [qiu](https://github.com/zachvalenta/util-scripts)
-
 # EXAMPLE REQUESTS
 
 __GET__
@@ -12,6 +10,8 @@ __GET__
 ```
 qiu -po 5000 -pa books
 ```
+
+📍 [qiu](https://github.com/zachvalenta/util-scripts) is just a wrapper I wrote around [httpie](https://github.com/jakubroztocil/httpie)
 
 ✅ count
 ```
