@@ -5,6 +5,7 @@ from flask import Flask, jsonify, request, Response
 # TODO: swap out `jsonify()`
 # TODO: add PATCH
 # TODO: add DELETE
+# TODO: POST/PUT n -> rf PUT to use isbn from URL
 # TODO: 研究 Location header, sets, mimetype
 
 app = Flask(__name__)
@@ -61,7 +62,8 @@ def get_book(isbn):
 @app.route('/books', methods=['POST'])
 def post_book():
     new_book = request.get_json()
-    if lookup_by_isbn(new_book['isbn']):
+    book_exists = lookup_by_isbn(new_book['isbn'])
+    if book_exists:
         return Response('book already exists', 400)
     if not check_keys_present(new_book):
         return Response('keys missing', 400)
