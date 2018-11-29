@@ -55,8 +55,7 @@ def get_book(isbn):
     if book_found:
         return jsonify({'book': book_found})
     else:
-        res = Response('no book found', 404)
-        return res
+        return Response('no book found', 404)
 
 
 @app.route('/books', methods=['POST'])
@@ -86,6 +85,17 @@ def put_book(isbn):
         validated_book = handle_extraneous_keys(new_book)
         books[books.index(book_to_update)] = validated_book
         return Response(json.dumps(validated_book), 200, mimetype='application/json')
+
+
+@app.route('/books/<string:isbn>', methods=['PATCH'])
+def patch_price(isbn):
+    new_price = request.get_json()['price']
+    book_to_update = lookup_by_isbn(isbn)
+    if not book_to_update:
+        return Response('no book to update', 404)
+    else:
+        book_to_update['price'] = new_price
+        return Response(json.dumps(book_to_update), 200, mimetype='application/json')
 
 
 @app.route('/books/clear', methods=['DELETE'])

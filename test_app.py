@@ -82,3 +82,11 @@ class TestAPI(unittest.TestCase):
         url_isbn_lookup = '{}/{}'.format(self.base_url, book_update['isbn'])
         res = requests.put(url_isbn_lookup, json=book_update)
         self.assertEqual(400, res.status_code)
+
+    def test_PATCH_200(self):
+        book = {"name": "foo", "price": 42.00, "isbn": "0123456789"}
+        requests.post(self.base_url, json=book)
+        price_update = {"price": 43.00}
+        url_isbn_lookup = '{}/{}'.format(self.base_url, book['isbn'])
+        res = requests.patch(url_isbn_lookup, json=price_update)
+        self.assertEqual(200, res.status_code)

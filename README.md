@@ -6,35 +6,36 @@ This repo is a record of working through the course ['Building a REST API Using 
 
 __GET__
 
-✅ all
 ```
 qiu -po 5000 -pa books
 ```
 
 📍 [qiu](https://github.com/zachvalenta/util-scripts) is just a wrapper I wrote around [httpie](https://github.com/jakubroztocil/httpie)
 
-✅ count
 ```
 qiu -po 5000 -pa books/count
 ```
 
-✅ single
 ```
 qiu -po 5000 -pa books/<isbn>
 ```
 
 __POST__
 
-✅ single
 ```
 qiu -po 5000 -pa books -m POST -j json/post.json
 ```
 
 __PUT__
 
-✅ single
 ```
 qiu -po 5000 -pa books/0812972864 -m PUT -j json/put.json
+```
+
+__PUT__
+
+```
+qiu -po 5000 -pa books/0812972864 -m PATCH -j json/patch.json
 ```
 
 __DELETE__
