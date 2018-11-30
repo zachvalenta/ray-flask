@@ -32,7 +32,7 @@ __PUT__
 qiu -po 5000 -pa books/0812972864 -m PUT -j json/put.json
 ```
 
-__PUT__
+__PATCH__
 
 ```
 qiu -po 5000 -pa books/0812972864 -m PATCH -j json/patch.json

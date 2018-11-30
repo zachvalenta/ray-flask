@@ -2,10 +2,9 @@ import json
 
 from flask import Flask, jsonify, request, Response
 
+# TODO: DELETE - add test
+# TODO: POST/PUT - add n (vs. just 1), rf PUT to use isbn from URL
 # TODO: swap out `jsonify()`
-# TODO: add PATCH
-# TODO: add DELETE
-# TODO: POST/PUT n -> rf PUT to use isbn from URL
 # TODO: 研究 Location header, sets, mimetype
 
 app = Flask(__name__)
@@ -96,6 +95,17 @@ def patch_price(isbn):
     else:
         book_to_update['price'] = new_price
         return Response(json.dumps(book_to_update), 200, mimetype='application/json')
+
+
+@app.route('/books/<string:isbn>', methods=['DELETE'])
+def delete_book(isbn):
+    book_to_delete = lookup_by_isbn(isbn)
+    if not book_to_delete:
+        return Response('no book to update', 404)
+    else:
+        index_to_rm = books.index(book_to_delete)
+        del books[index_to_rm]
+        return Response('gotcha', 204, mimetype='application/json')
 
 
 @app.route('/books/clear', methods=['DELETE'])
