@@ -2,7 +2,6 @@ import json
 
 from flask import Flask, jsonify, request, Response
 
-# TODO: DELETE - add test
 # TODO: POST/PUT - add n (vs. just 1), rf PUT to use isbn from URL
 # TODO: swap out `jsonify()`
 # TODO: 研究 Location header, sets, mimetype

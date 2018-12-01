@@ -91,9 +91,18 @@ class TestAPI(unittest.TestCase):
         res = requests.patch(url_isbn_lookup, json=price_update)
         self.assertEqual(200, res.status_code)
 
-    def test_DELETE_204(self):
+    def test_DELETE_single_204(self):
         book = {"name": "foo", "price": 42.00, "isbn": "987654321"}
         requests.post(self.base_url, json=book)
         url_isbn_lookup = '{}/{}'.format(self.base_url, book['isbn'])
         res = requests.delete(url_isbn_lookup)
         self.assertEqual(204, res.status_code)
+
+    def test_DELETE_all_204(self):
+        book1 = {"name": "foo", "price": 42.00, "isbn": "987654321"}
+        book2 = {"name": "foo", "price": 42.00, "isbn": "123456789"}
+        requests.post(self.base_url, json=book1)
+        requests.post(self.base_url, json=book2)
+        requests.delete('{}{}'.format(self.base_url, '/clear'))
+        res = requests.get('{}{}'.format(self.base_url, '/count'))
+        self.assertEqual(0, res.json()['book_count'])
