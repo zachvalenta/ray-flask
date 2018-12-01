@@ -90,3 +90,10 @@ class TestAPI(unittest.TestCase):
         url_isbn_lookup = '{}/{}'.format(self.base_url, book['isbn'])
         res = requests.patch(url_isbn_lookup, json=price_update)
         self.assertEqual(200, res.status_code)
+
+    def test_DELETE_204(self):
+        book = {"name": "foo", "price": 42.00, "isbn": "987654321"}
+        requests.post(self.base_url, json=book)
+        url_isbn_lookup = '{}/{}'.format(self.base_url, book['isbn'])
+        res = requests.delete(url_isbn_lookup)
+        self.assertEqual(204, res.status_code)
