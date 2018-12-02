@@ -1,12 +1,11 @@
 import json
 
-from flask import Flask, jsonify, request, Response
+from flask import jsonify, request, Response
+
+from settings import app
 
 # TODO: POST/PUT - add n (vs. just 1), rf PUT to use isbn from URL
-# TODO: swap out `jsonify()`
-# TODO: 研究 Location header, sets, mimetype
-
-app = Flask(__name__)
+# TODO: 研究 Location header, sets, mimetype, swapping out `jsonify()`
 
 
 # UTIL
