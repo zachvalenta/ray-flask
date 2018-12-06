@@ -10,7 +10,7 @@ __GET__
 qiu -po 5000 -pa books
 ```
 
-📍 [qiu](https://github.com/zachvalenta/util-scripts) is just a wrapper I wrote around [httpie](https://github.com/jakubroztocil/httpie)
+📍 [qiu](https://github.com/zachvalenta/qiu) is just a wrapper I wrote around [httpie](https://github.com/jakubroztocil/httpie)
 
 ```
 qiu -po 5000 -pa books/count
@@ -41,5 +41,5 @@ qiu -po 5000 -pa books/0812972864 -m PATCH -j json/patch.json
 __DELETE__
 
 ```
-qiu -po 5000 -pa books/clear -m DELETE
+qiu -po 5000 -pa books/0812972864 -m DELETE
 ```

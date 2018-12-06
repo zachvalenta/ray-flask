@@ -5,6 +5,7 @@ from flask import jsonify, request, Response
 from settings import app
 
 # TODO: POST/PUT - add n (vs. just 1), rf PUT to use isbn from URL
+# TODO: Git hooks
 # TODO: 研究 Location header, sets, mimetype, swapping out `jsonify()`
 
 
@@ -66,7 +67,8 @@ def post_book():
     validated_book = handle_extraneous_keys(new_book)
     books.insert(0, validated_book)
     res = Response(json.dumps(new_book), 201, mimetype='application/json')
-    res.headers['Location'] = '{}{}'.format('/books/', str(validated_book['isbn']))
+    res.headers['Location'] = '{}{}'.\
+        format('/books/', str(validated_book['isbn']))
     return res
 
 
@@ -81,7 +83,8 @@ def put_book(isbn):
     else:
         validated_book = handle_extraneous_keys(new_book)
         books[books.index(book_to_update)] = validated_book
-        return Response(json.dumps(validated_book), 200, mimetype='application/json')
+        return Response(json.dumps(validated_book),
+                        200, mimetype='application/json')
 
 
 @app.route('/books/<string:isbn>', methods=['PATCH'])
@@ -92,7 +95,8 @@ def patch_price(isbn):
         return Response('no book to update', 404)
     else:
         book_to_update['price'] = new_price
-        return Response(json.dumps(book_to_update), 200, mimetype='application/json')
+        return Response(json.dumps(book_to_update),
+                        200, mimetype='application/json')
 
 
 @app.route('/books/<string:isbn>', methods=['DELETE'])

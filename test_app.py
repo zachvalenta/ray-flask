@@ -36,7 +36,8 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(201, res.status_code)
 
     def test_POST_201_key_extraneous(self):
-        book = {"name": "foo", "price": 42.00, "isbn": "0374533123", "bar": "baz"}
+        book = {"name": "foo", "price": 42.00,
+                "isbn": "0374533123", "bar": "baz"}
         res = requests.post(self.base_url, json=book)
         self.assertEqual(201, res.status_code)
 
@@ -62,7 +63,8 @@ class TestAPI(unittest.TestCase):
     def test_PUT_200_key_extraneous(self):
         book = {"name": "alice", "price": 42.00, "isbn": "0374533123"}
         requests.post(self.base_url, json=book)
-        book_update = {"name": "alice", "price": 43.00, "isbn": "0374533123", "foo": "bar"}
+        book_update = {"name": "alice", "price": 43.00,
+                       "isbn": "0374533123", "foo": "bar"}
         url_isbn_lookup = '{}/{}'.format(self.base_url, book_update['isbn'])
         res = requests.put(url_isbn_lookup, json=book_update)
         self.assertEqual(200, res.status_code)
