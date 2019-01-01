@@ -1,8 +1,25 @@
-# OVERVIEW
+# TODO
 
-This repo is a record of working through the course ['Building a REST API Using Python and Flask'](https://app.pluralsight.com/library/courses/python-flask-rest-api/table-of-contents)
+## doing 
 
-# EXAMPLE REQUESTS
+
+
+## next
+
+- [ ] gunicorn / Nginx
+- [ ] `m test` - start app, run tests, shut down
+- [ ] db - sqlite3
+- [ ] db - SQLAlchemy
+- [ ] JWT
+- [ ] ER model - replace `bookshelf-*.md` (`is_current`) -> http://fastml.com/goodbooks-10k-a-new-dataset-for-book-recommendations/)
+
+## done
+
+- [x] basic app
+
+# ZA
+
+## example requests
 
 __GET__
 
