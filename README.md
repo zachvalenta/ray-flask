@@ -1,16 +1,20 @@
 # TODO
 
+🔗 https://github.com/zachvalenta/flask-rest-api/
+
 ## doing 
 
 - [ ] gunicorn / Nginx
 
 ## next
 
-- [ ] `m test` - start app, run tests, shut down
 - [ ] db - sqlite3
-- [ ] db - SQLAlchemy
+- [ ] db - `m test` - start app, run tests, tear down in-mem db
 - [ ] JWT
+- [ ] db - Flask tutorial for more realistic setup
+- [ ] db - `m test` - replace first impl
 - [ ] ER model - replace `bookshelf-*.md` (`is_current`) -> http://fastml.com/goodbooks-10k-a-new-dataset-for-book-recommendations/)
+- [ ] db - SQLAlchemy
 
 ## done
 
