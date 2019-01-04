@@ -2,11 +2,10 @@
 
 ## doing 
 
-
+- [ ] gunicorn / Nginx
 
 ## next
 
-- [ ] gunicorn / Nginx
 - [ ] `m test` - start app, run tests, shut down
 - [ ] db - sqlite3
 - [ ] db - SQLAlchemy
