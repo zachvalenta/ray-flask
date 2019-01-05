@@ -6,6 +6,8 @@
 
 - [ ] gunicorn / Nginx
 
+> 📍 think this needs further work because still passing requests through to Flask dev server
+
 ## next
 
 - [ ] db - sqlite3

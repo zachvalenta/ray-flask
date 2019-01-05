@@ -10,8 +10,11 @@ pip-reset:
 	rm pkgs-to-rm.txt
 	pip install -r requirements.txt
 
-run:
+serve-flask:
 	source venv/bin/activate; export FLASK_APP=app; export FLASK_ENV=development; flask run
+
+serve-gunicorn:
+	gunicorn app:app
 
 test:
 	python3 -m unittest discover -v
