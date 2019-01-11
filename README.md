@@ -2,21 +2,28 @@
 
 🔗 https://github.com/zachvalenta/flask-rest-api/
 
+🔗 `/Users/zach/Desktop/zvmac/materials/sw/za/data/bookcase`
+
+📍 replace `bookshelf-*.md` (`is_current`) and `~/bin/shugui`
+
 ## doing 
 
 - [ ] gunicorn / Nginx
 
-> 📍 think this needs further work because still passing requests through to Flask dev server
+> 📍 think this needs further work because still passing requests through to Flask dev server -> https://stackoverflow.com/q/13596558/6813490
 
 ## next
 
-- [ ] db - sqlite3
-- [ ] db - `m test` - start app, run tests, tear down in-mem db
-- [ ] JWT
-- [ ] db - Flask tutorial for more realistic setup
-- [ ] db - `m test` - replace first impl
-- [ ] ER model - replace `bookshelf-*.md` (`is_current`) -> http://fastml.com/goodbooks-10k-a-new-dataset-for-book-recommendations/)
 - [ ] db - SQLAlchemy
+- [ ] JWT
+- [ ] research https://testdriven.io/courses/microservices-with-docker-flask-and-react/ + https://mherman.org/
+- [ ] db - sqlite3 🔗 `db.md`
+- [ ] db - Flask tutorial for more realistic setup
+- [ ] db - ER model - http://fastml.com/goodbooks-10k-a-new-dataset-for-book-recommendations/)
+- [ ] db - start app, run tests, tear down in-mem db https://realpython.com/python-testing/
+
+* 🔗 `testing.md`
+* test db https://julien.danjou.info/db-integration-testing-strategies-python/ + setup temp db and teardown after test https://stackoverflow.com/a/29822459/6813490
 
 ## done
 
