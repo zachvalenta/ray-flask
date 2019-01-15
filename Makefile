@@ -1,5 +1,5 @@
 help:
-	@echo "lint:    run flake8"
+	@echo "lint:    lint using flake8"
 	@echo "pip-in:  install dependencies from requirements.txt"
 	@echo "pip-rs:  remove any installed pkg *not* in requirements.txt"
 	@echo "run-f:   run Flask"
