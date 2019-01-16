@@ -9,10 +9,13 @@ help:
 lint:
 	flake8 *.py
 
-pip-in:
+pipfr:
+	pip freeze > requirements.txt
+
+pipin:
 	pip install -r requirements.txt
 
-pip-rs:
+piprs:
 	pip freeze > pkgs-to-rm.txt
 	pip uninstall -y -r pkgs-to-rm.txt
 	rm pkgs-to-rm.txt
