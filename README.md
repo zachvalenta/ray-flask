@@ -16,6 +16,7 @@
 
 - [ ] db - SQLAlchemy
 - [ ] JWT
+- [ ] refactor app structure to use `coverage.py`, read up about testing Flask
 - [ ] research https://testdriven.io/courses/microservices-with-docker-flask-and-react/ + https://mherman.org/
 - [ ] db - sqlite3 🔗 `db.md`
 - [ ] db - Flask tutorial for more realistic setup
