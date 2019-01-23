@@ -5,7 +5,6 @@ from flask import jsonify, request, Response
 from settings import app
 
 # TODO: POST/PUT - add n (vs. just 1), rf PUT to use isbn from URL
-# TODO: Git hooks
 # TODO: 研究 Location header, sets, mimetype, swapping out `jsonify()`
 
 
