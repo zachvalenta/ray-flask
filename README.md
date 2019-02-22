@@ -16,10 +16,13 @@
 
 - [ ] db - SQLAlchemy
 - [ ] JWT
-- [ ] research https://testdriven.io/courses/microservices-with-docker-flask-and-react/ + https://mherman.org/
+- [ ] db - ER model - http://fastml.com/goodbooks-10k-a-new-dataset-for-book-recommendations/)
+
+---
+
 - [ ] db - sqlite3 🔗 `db.md`
 - [ ] db - Flask tutorial for more realistic setup
-- [ ] db - ER model - http://fastml.com/goodbooks-10k-a-new-dataset-for-book-recommendations/)
+- [ ] [host on Linode](https://www.youtube.com/watch?v=LUFn-QVcmB8)
 - [ ] db - start app, run tests, tear down in-mem db https://realpython.com/python-testing/
 
 * 🔗 `testing.md`
