@@ -1,12 +1,31 @@
+# help:
+# 	@echo
+# 	@echo "lint:   lint using flake8"
+# 	@echo "pipfr:  freeze dependencies into requirements.txt"
+# 	@echo "pipin:  install dependencies from requirements.txt"
+# 	@echo "piprs:  remove any installed pkg *not* in requirements.txt"
+# 	@echo "rf:     run Flask"
+# 	@echo "rg:     run gunicorn"
+# 	@echo "test:   exec unit tests"
+# 	@echo
+
 help:
 	@echo
-	@echo "lint:   lint using flake8"
-	@echo "pipfr:  freeze dependencies into requirements.txt"
-	@echo "pipin:  install dependencies from requirements.txt"
-	@echo "piprs:  remove any installed pkg *not* in requirements.txt"
-	@echo "rf:     run Flask"
-	@echo "rg:     run gunicorn"
-	@echo "test:   exec unit tests"
+	@echo "📡 SERVERS"
+	@echo
+	@echo "rg:    	run Gunicorn"
+	@echo "rf:    	run Flask"
+	@echo
+	@echo "📊 CODE QUALITY"
+	@echo
+	@echo "lint:    lint using flake8"
+	@echo "test:    run unit tests, view basic coverage report in terminal"
+	@echo
+	@echo "📦 DEPENDENCIES"
+	@echo
+	@echo "pipfr:   freeze dependencies into requirements.txt"
+	@echo "pipin:   install dependencies from requirements.txt"
+	@echo "piprs:   remove any installed pkg *not* in requirements.txt"
 	@echo
 
 lint:
