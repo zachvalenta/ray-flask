@@ -49,4 +49,4 @@ rg:
 	gunicorn app:app
 
 test:
-	python3 -m unittest discover -v
+	python3 -m pytest -v

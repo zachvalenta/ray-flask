@@ -20,6 +20,7 @@
 
 ---
 
+- [ ] https://realpython.com/python-testing/
 - [ ] db - sqlite3 🔗 `db.md`
 - [ ] db - Flask tutorial for more realistic setup
 - [ ] [host on Linode](https://www.youtube.com/watch?v=LUFn-QVcmB8)
