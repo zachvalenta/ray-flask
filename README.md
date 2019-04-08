@@ -35,6 +35,8 @@
 
 # ZA
 
+https://blog.jft.rocks/random/build-a-better-bookshelf.html
+
 ## example requests
 
 __GET__

@@ -7,6 +7,7 @@ help:
 	@echo
 	@echo "📊 CODE QUALITY"
 	@echo
+	@echo "fmt:     auto format code using Black"
 	@echo "lint:    lint using flake8"
 	@echo "test:    run unit tests, view basic coverage report in terminal"
 	@echo
@@ -16,6 +17,9 @@ help:
 	@echo "pipin:   install dependencies from requirements.txt"
 	@echo "piprs:   remove any installed pkg *not* in requirements.txt"
 	@echo
+
+fmt:
+	black app.py test_app.py
 
 lint:
 	flake8 *.py

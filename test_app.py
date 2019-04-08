@@ -5,10 +5,10 @@ import requests
 
 class TestAPI(unittest.TestCase):
 
-    base_url = 'http://127.0.0.1:5000/books'
+    base_url = "http://127.0.0.1:5000/books"
 
     def tearDown(self):
-        url_clear = '{}/{}'.format(self.base_url, 'clear')
+        url_clear = "{}/{}".format(self.base_url, "clear")
         requests.delete(url_clear)
 
     def test_GET_200(self):
@@ -18,14 +18,14 @@ class TestAPI(unittest.TestCase):
     def test_GET_200_isbn_lookup(self):
         book = {"name": "foo", "price": 42.00, "isbn": "0374533229"}
         requests.post(self.base_url, json=book)
-        isbn = '0374533229'
-        url_isbn_lookup = '{}/{}'.format(self.base_url, isbn)
+        isbn = "0374533229"
+        url_isbn_lookup = "{}/{}".format(self.base_url, isbn)
         res = requests.get(url_isbn_lookup)
         self.assertEqual(200, res.status_code)
 
     def test_GET_404_isbn_lookup(self):
-        isbn = '0000'
-        isbn_lookup_url = '{}/{}'.format(self.base_url, isbn)
+        isbn = "0000"
+        isbn_lookup_url = "{}/{}".format(self.base_url, isbn)
         res = requests.get(isbn_lookup_url)
         self.assertEqual(404, res.status_code)
 
@@ -36,8 +36,7 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(201, res.status_code)
 
     def test_POST_201_key_extraneous(self):
-        book = {"name": "foo", "price": 42.00,
-                "isbn": "0374533123", "bar": "baz"}
+        book = {"name": "foo", "price": 42.00, "isbn": "0374533123", "bar": "baz"}
         res = requests.post(self.base_url, json=book)
         self.assertEqual(201, res.status_code)
 
@@ -56,16 +55,20 @@ class TestAPI(unittest.TestCase):
         book = {"name": "foo", "price": 42.00, "isbn": "0123456789"}
         requests.post(self.base_url, json=book)
         book_update = {"name": "foo", "price": 43.00, "isbn": "0123456789"}
-        url_isbn_lookup = '{}/{}'.format(self.base_url, book['isbn'])
+        url_isbn_lookup = "{}/{}".format(self.base_url, book["isbn"])
         res = requests.put(url_isbn_lookup, json=book_update)
         self.assertEqual(200, res.status_code)
 
     def test_PUT_200_key_extraneous(self):
         book = {"name": "alice", "price": 42.00, "isbn": "0374533123"}
         requests.post(self.base_url, json=book)
-        book_update = {"name": "alice", "price": 43.00,
-                       "isbn": "0374533123", "foo": "bar"}
-        url_isbn_lookup = '{}/{}'.format(self.base_url, book_update['isbn'])
+        book_update = {
+            "name": "alice",
+            "price": 43.00,
+            "isbn": "0374533123",
+            "foo": "bar",
+        }
+        url_isbn_lookup = "{}/{}".format(self.base_url, book_update["isbn"])
         res = requests.put(url_isbn_lookup, json=book_update)
         self.assertEqual(200, res.status_code)
 
@@ -73,7 +76,7 @@ class TestAPI(unittest.TestCase):
         book = {"name": "foo", "price": 42.00, "isbn": "0123456789"}
         requests.post(self.base_url, json=book)
         book_update = {"name": "foo", "price": 43.00, "isbn": "000"}
-        url_isbn_lookup = '{}/{}'.format(self.base_url, book_update['isbn'])
+        url_isbn_lookup = "{}/{}".format(self.base_url, book_update["isbn"])
         res = requests.put(url_isbn_lookup, json=book_update)
         self.assertEqual(404, res.status_code)
 
@@ -81,7 +84,7 @@ class TestAPI(unittest.TestCase):
         book = {"name": "alice", "price": 42.00, "isbn": "0374533123"}
         requests.post(self.base_url, json=book)
         book_update = {"price": 44.00, "isbn": "0374533123"}
-        url_isbn_lookup = '{}/{}'.format(self.base_url, book_update['isbn'])
+        url_isbn_lookup = "{}/{}".format(self.base_url, book_update["isbn"])
         res = requests.put(url_isbn_lookup, json=book_update)
         self.assertEqual(400, res.status_code)
 
@@ -89,14 +92,14 @@ class TestAPI(unittest.TestCase):
         book = {"name": "foo", "price": 42.00, "isbn": "0123456789"}
         requests.post(self.base_url, json=book)
         price_update = {"price": 43.00}
-        url_isbn_lookup = '{}/{}'.format(self.base_url, book['isbn'])
+        url_isbn_lookup = "{}/{}".format(self.base_url, book["isbn"])
         res = requests.patch(url_isbn_lookup, json=price_update)
         self.assertEqual(200, res.status_code)
 
     def test_DELETE_single_204(self):
         book = {"name": "foo", "price": 42.00, "isbn": "987654321"}
         requests.post(self.base_url, json=book)
-        url_isbn_lookup = '{}/{}'.format(self.base_url, book['isbn'])
+        url_isbn_lookup = "{}/{}".format(self.base_url, book["isbn"])
         res = requests.delete(url_isbn_lookup)
         self.assertEqual(204, res.status_code)
 
@@ -105,6 +108,6 @@ class TestAPI(unittest.TestCase):
         book2 = {"name": "foo", "price": 42.00, "isbn": "123456789"}
         requests.post(self.base_url, json=book1)
         requests.post(self.base_url, json=book2)
-        requests.delete('{}{}'.format(self.base_url, '/clear'))
-        res = requests.get('{}{}'.format(self.base_url, '/count'))
-        self.assertEqual(0, res.json()['book_count'])
+        requests.delete("{}{}".format(self.base_url, "/clear"))
+        res = requests.get("{}{}".format(self.base_url, "/count"))
+        self.assertEqual(0, res.json()["book_count"])
