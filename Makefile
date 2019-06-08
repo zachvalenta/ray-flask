@@ -2,23 +2,31 @@
 
 help:
 	@echo
-	@echo "📡 SERVERS"
+	@echo "🛣  APP"
 	@echo
-	@echo "guni:    run Gunicorn"
-	@echo "run:    	run Flask"
+	@echo "run:     	run dev server"
+	@echo "guni:     	run gunicorn"
+	@echo "reset:     	drop db and recreate blank"
 	@echo
-	@echo "📊 CODE QUALITY"
+	@echo "🛠  TOOLING"
 	@echo
-	@echo "fmt:     auto format code using Black"
-	@echo "lint:    lint using flake8"
-	@echo "test:    run unit tests, view basic coverage report in terminal"
+	@echo "fmt:     	auto format code using Black"
+	@echo "lint:    	lint using flake8"
+	@echo "repl:    	debug using bpython"
+	@echo "secure:  	security check using Bandit"
 	@echo
 	@echo "📦 DEPENDENCIES"
 	@echo
-	@echo "pipfr:   freeze dependencies into requirements.txt"
-	@echo "pipin:   install dependencies from requirements.txt"
-	@echo "piprs:   remove any installed pkg *not* in requirements.txt"
+	@echo "freeze:   	freeze dependencies into requirements.txt"
+	@echo "install:   	install dependencies from requirements.txt"
+	@echo "purge:   	remove any installed pkg *not* in requirements.txt"
 	@echo
+
+guni:
+	gunicorn app:app
+
+run:
+	source venv/bin/activate; export FLASK_APP=app; export FLASK_ENV=development; flask run
 
 reset:
 	qing local.db; touch local.db
@@ -29,13 +37,19 @@ fmt:
 lint:
 	flake8 *.py
 
-pipfr:
+repl:
+	bpython
+
+test:
+	python3 -m pytest -v
+
+freeze:
 	pip freeze > requirements.txt
 
-pipin:
+install:
 	pip install -r requirements.txt
 
-piprs:
+purge:
 	@echo "🔍 - DISCOVERING UNSAVED PACKAGES\n"
 	pip freeze > pkgs-to-rm.txt
 	@echo
@@ -51,11 +65,3 @@ piprs:
 	rm pkgs-to-rm.txt
 	@echo
 
-run:
-	source venv/bin/activate; export FLASK_APP=app; export FLASK_ENV=development; flask run
-
-guni:
-	gunicorn app:app
-
-test:
-	python3 -m pytest -v
