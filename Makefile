@@ -3,7 +3,7 @@ help:
 	@echo "📡 SERVERS"
 	@echo
 	@echo "rg:    	run Gunicorn"
-	@echo "rf:    	run Flask"
+	@echo "run:    	run Flask"
 	@echo
 	@echo "📊 CODE QUALITY"
 	@echo
@@ -17,6 +17,9 @@ help:
 	@echo "pipin:   install dependencies from requirements.txt"
 	@echo "piprs:   remove any installed pkg *not* in requirements.txt"
 	@echo
+
+reset:
+	qing local.db; touch local.db
 
 fmt:
 	black app.py test_app.py
@@ -46,7 +49,7 @@ piprs:
 	rm pkgs-to-rm.txt
 	@echo
 
-rf:
+run:
 	source venv/bin/activate; export FLASK_APP=app; export FLASK_ENV=development; flask run
 
 rg:
