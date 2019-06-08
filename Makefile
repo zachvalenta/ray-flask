@@ -1,8 +1,10 @@
+.PHONY: test
+
 help:
 	@echo
 	@echo "📡 SERVERS"
 	@echo
-	@echo "rg:    	run Gunicorn"
+	@echo "guni:    run Gunicorn"
 	@echo "run:    	run Flask"
 	@echo
 	@echo "📊 CODE QUALITY"
@@ -52,7 +54,7 @@ piprs:
 run:
 	source venv/bin/activate; export FLASK_APP=app; export FLASK_ENV=development; flask run
 
-rg:
+guni:
 	gunicorn app:app
 
 test:
