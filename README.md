@@ -1,33 +1,15 @@
 # TODO
 
-🔗 https://github.com/zachvalenta/flask-rest-api/
-
-🔗 `/Users/zach/Desktop/zvmac/materials/sw/za/data/bookcase`
-
-📍 replace `bookshelf-*.md` (`is_current`) and `~/bin/shugui`
-
 ## doing 
 
-- [ ] gunicorn / Nginx
-
-> 📍 think this needs further work because still passing requests through to Flask dev server -> https://stackoverflow.com/q/13596558/6813490
+- [ ] module 7 - SQLAlchemy
 
 ## next
 
-- [ ] db - SQLAlchemy
-- [ ] JWT
-- [ ] db - ER model - http://fastml.com/goodbooks-10k-a-new-dataset-for-book-recommendations/)
-
----
-
-- [ ] https://realpython.com/python-testing/
-- [ ] db - sqlite3 🔗 `db.md`
-- [ ] db - Flask tutorial for more realistic setup
-- [ ] [host on Linode](https://www.youtube.com/watch?v=LUFn-QVcmB8)
-- [ ] db - start app, run tests, tear down in-mem db https://realpython.com/python-testing/
-
-* 🔗 `testing.md`
-* test db https://julien.danjou.info/db-integration-testing-strategies-python/ + setup temp db and teardown after test https://stackoverflow.com/a/29822459/6813490
+- [ ] module 8 - JWT
+- [ ] ER model - http://fastml.com/goodbooks-10k-a-new-dataset-for-book-recommendations/ https://news.ycombinator.com/item?id=19847882
+- [ ] testing https://realpython.com/python-testing/#testing-for-web-frameworks-like-django-and-flask + https://julien.danjou.info/db-integration-testing-strategies-python/ + https://github.com/tk0miya/testing.postgresql
+- [ ] review modules 1-6
 
 ## done
 
@@ -35,17 +17,15 @@
 
 # ZA
 
-https://blog.jft.rocks/random/build-a-better-bookshelf.html
-
 ## example requests
+
+📍 1) bring `httpie` into venv so you can run w/ `venv` activated 2) bring these req into `Makefile`
 
 __GET__
 
 ```
 qiu -po 5000 -pa books
 ```
-
-📍 [qiu](https://github.com/zachvalenta/qiu) is just a wrapper I wrote around [httpie](https://github.com/jakubroztocil/httpie)
 
 ```
 qiu -po 5000 -pa books/count

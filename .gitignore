@@ -6,3 +6,6 @@
 
 # virtualenv
 venv
+
+# sqlite
+local.db
