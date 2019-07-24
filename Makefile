@@ -2,9 +2,9 @@
 
 help:
 	@echo
-	@echo "🛣  APP"
+	@echo "🍶  FLASK"
 	@echo
-	@echo "run:     	run dev server"
+	@echo "flask:     	run dev server"
 	@echo "guni:     	run gunicorn"
 	@echo "reset:     	drop db and recreate blank"
 	@echo
@@ -25,8 +25,8 @@ help:
 guni:
 	gunicorn app:app
 
-run:
-	source venv/bin/activate; export FLASK_APP=app; export FLASK_ENV=development; flask run
+flask:
+	source venv/bin/activate; flask run
 
 reset:
 	qing local.db; touch local.db

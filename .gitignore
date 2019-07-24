@@ -1,11 +1,14 @@
+# env var
+.env
+
 # macOS
 .DS_Store
 
 # PyCharm
 .idea
 
-# virtualenv
-venv
-
 # sqlite
 local.db
+
+# virtualenv
+venv

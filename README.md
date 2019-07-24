@@ -4,10 +4,12 @@
 
 - [ ] module 7 - SQLAlchemy
 
+* weird things about this course: global installs
+
 ## next
 
 - [ ] module 8 - JWT
-- [ ] ER model - http://fastml.com/goodbooks-10k-a-new-dataset-for-book-recommendations/ https://news.ycombinator.com/item?id=19847882
+- [ ] ER model - http://fastml.com/goodbooks-10k-a-new-dataset-for-book-recommendations/ https://news.ycombinator.com/item?id=19847882 https://patrickcollison.com/bookshelf current reading `find . -name "_bookshelf.md" | xargs bat | grep -A 10 '## doing'` http://worrydream.com/Shelf2015/
 - [ ] testing https://realpython.com/python-testing/#testing-for-web-frameworks-like-django-and-flask + https://julien.danjou.info/db-integration-testing-strategies-python/ + https://github.com/tk0miya/testing.postgresql
 - [ ] review modules 1-6
 
