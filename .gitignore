@@ -1,14 +1,8 @@
-# env var
 .env
-
-# macOS
 .DS_Store
-
-# PyCharm
 .idea
-
-# sqlite
+.pytest_cache
+.vscode
+book-db.code-workspace
 local.db
-
-# virtualenv
 venv
